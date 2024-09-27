@@ -110,24 +110,7 @@ def is_orthogonal(x: np.ndarray, y: np.ndarray) -> bool:
     # Check if the dot product is close to zero
     return math.isclose(dot_prod, 0)
 
-
-def solves_linear_systems1(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    if b.ndim == 2 and b.shape[1] == 1:
-        b = b.ravel()
-
-    return np.linalg.solve(a, b)
-
-
-def solves_linear_systems2(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Solve a system of linear equations using Gaussian elimination.
-
-    Args:
-        a (np.ndarray): Coefficient matrix.
-        b (np.ndarray): Ordinate values.
-
-    Returns:
-        np.ndarray: Solution vector.
-    """
+def solves_linear_systems(a: np.ndarray, b: np.ndarray) -> np.ndarray:
     n = len(b)
 
     # Augment the matrix 'a' with vector 'b'
@@ -160,37 +143,4 @@ def solves_linear_systems2(a: np.ndarray, b: np.ndarray) -> np.ndarray:
         x[i] = aug_matrix[i, -1] - np.dot(aug_matrix[i, i + 1:n], x[i + 1:n])
 
     return x
-
-x=get_vector(10)
-y=get_sparse_vector(10)
-"""print(x)
-print("-----------")
-print(y)
-print("-----------")
-print(add(x, y.toarray()))
-print("-----------")
-print(scalar_multiplication(add(x, y.toarray()), 10))
-print("-----------")
-print(linear_combination([x, y], [10, 10]))
-print("-----------")
-print(dot_product(x, y.toarray()))
-print("-----------")
-print(norm(x, 1))
-print("-----------")
-print(norm(y.toarray(), 1))
-print("-----------")
-print(distance(x, y))
-print("-----------")
-print(cos_between_vectors(x.T, y.toarray()))
-print("-----------")
-print(is_orthogonal(x.T, y.toarray()))
-print("-----------")
-print(is_orthogonal([1, 0], [0, 1]))
-print("-----------")
-"""
-a = np.array([[1, 2], [3, 5]])
-b = np.array([1, 2])
-print(solves_linear_systems1(a, b))
-print("-----------")
-print(solves_linear_systems2(a, b))
 

@@ -114,8 +114,7 @@ def solves_linear_systems(a: np.ndarray, b: np.ndarray) -> np.ndarray:
     n = len(b)
 
     # Augment the matrix 'a' with vector 'b'
-    aug_matrix = np.hstack((a, b.reshape(-1, 1)))
-    print(aug_matrix)
+    aug_matrix = np.hstack((a.astype(np.float64), b.reshape(-1, 1).astype(np.float64)))
 
     # Forward elimination
     for i in range(n):
@@ -138,9 +137,8 @@ def solves_linear_systems(a: np.ndarray, b: np.ndarray) -> np.ndarray:
             aug_matrix[j] = aug_matrix[j] - factor * aug_matrix[i]
 
     # Back substitution
-    x = np.zeros(n)
+    x = np.zeros(n, dtype=np.float64)
     for i in range(n - 1, -1, -1):
         x[i] = aug_matrix[i, -1] - np.dot(aug_matrix[i, i + 1:n], x[i + 1:n])
 
     return x
-

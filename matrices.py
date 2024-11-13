@@ -1,7 +1,5 @@
 import numpy as np
-import vectors as v
 import random
-from typing import List
 
 
 def get_matrix(n: int, m: int) -> np.ndarray:
